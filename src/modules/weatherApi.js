@@ -1,9 +1,9 @@
-const API_KEY = '20f7632ffc2c022654e4093c6947b4f4';
-
 const Weather = (() => {
+  const API_KEY = '90fe759deb899e5e74f5f9169fa989de';
   const APILink = 'https://api.openweathermap.org/data/2.5/onecall';
 
-  async function fetchWeather(lon, lat) {
+  // Function to get all the geocode data from Geocode API
+  async function getWeather(lon, lat) {
     try {
       const cityLon = await lon;
       const cityLat = await lat;
@@ -18,7 +18,8 @@ const Weather = (() => {
       );
 
       // Check API responses/status
-      if (!responseCel.ok && !responseFahr.ok) throw new Error('Cant get the Weather :(');
+      if (!responseCel.ok) throw new Error('Failed to fetch Celsius weather data :(');
+      if (!responseFahr.ok) throw new Error('Failed to fetch Fahrenheit weather data :(');
 
       const dataCelsius = await responseCel.json();
       const dataFahrenheit = await responseFahr.json();
@@ -31,7 +32,7 @@ const Weather = (() => {
   }
 
   return {
-    fetchWeather
+    getWeather
   };
 })();
 
