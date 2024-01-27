@@ -27,8 +27,8 @@ const MainPage = (() => {
             </div>
 
             <div class="errorMessage">
-            <p class="cityError">Please enter valid city.</p>
-            <p class="serverError">Can't connect to server, try again.</p>
+            <p class="cityError hidden">Please enter valid city.</p>
+            <p class="serverError hidden">Can't connect to server, try again.</p>
             </div>
         </form>
         <div id="coreInfo" class="wrapper"></div>
@@ -73,6 +73,9 @@ const MainPage = (() => {
     const dailyForecast = createDailyForecast();
 
     mainTag.append(mainInfo, hourlyForecast, currentCondition, dailyForecast);
+
+    // Add Handler
+    EventHandler.mainPage();
   }
   return {
     initMain
