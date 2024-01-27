@@ -1,12 +1,18 @@
 import EventHandler from './eventHandler';
 
 const MainPage = (() => {
+  /**
+   * Create section element
+   * @param {string} id - Id to be used as the element id
+   * @returns {HTMLElement} - The section with the `id`
+   */
   function createSection(id) {
     const container = document.createElement('section');
     container.id = id;
     return container;
   }
 
+  // Function to create Main Info section
   function createMainInfo() {
     const container = createSection('mainInfo');
     container.innerHTML = `
@@ -36,6 +42,7 @@ const MainPage = (() => {
     return container;
   }
 
+  // Function to create Hourly Forecast section
   function createHourlyForecast() {
     const container = createSection('hourlyForecast');
     container.innerHTML = `
@@ -45,6 +52,7 @@ const MainPage = (() => {
     return container;
   }
 
+  // Function to create Current Condition section
   function createWeatherCondition() {
     const container = createSection('weatherCondition');
     container.innerHTML = `
@@ -54,6 +62,7 @@ const MainPage = (() => {
     return container;
   }
 
+  // Function to create Daily Forecast section
   function createDailyForecast() {
     const container = createSection('dailyForecast');
     container.innerHTML = `
