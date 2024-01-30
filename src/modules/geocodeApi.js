@@ -24,7 +24,8 @@ const GeoCode = (() => {
 
       return data[0];
     } catch (error) {
-      console.error(error);
+      // eslint-disable-next-line no-console
+      console.log(error);
 
       // Handle specific error case for unavailable data
       if (error.message === `Data unavailable for '${cityName}' city.`) return -1;
