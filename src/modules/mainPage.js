@@ -12,34 +12,32 @@ const MainPage = (() => {
     return container;
   }
 
-  // Function to create Main Info section
-  function createMainInfo() {
-    const container = createSection('mainInfo');
-    container.innerHTML = `
-        <form id="searchWeather">
-            <div class="searchBox"> 
-                <div class="unit">
-                    <input type="radio" name="unit" id="celsiusRadio" value="Celsius" checked />
-                    <label for="celsiusRadio">Celsius</label>  
-                    <input type="radio" name="unit" id="fahrenheitRadio" value="Fahrenheit" />
-                    <label for="fahrenheitRadio">Fahrenheit</label> 
-                </div>
+  // Function to create Search city form and change the unit
+  function createForm() {
+    const form = document.createElement('form');
+    form.id = 'searchWeather';
+    form.innerHTML = `
+    <div class="searchBox"> 
+      <input type="text" name="cityName" id="cityNameInput" required placeholder="Enter name of the city (e.g. London)"/> 
+      
+      <button type="submit">
+        <span class="material-symbols-outlined"> search </span>
+      </button>
 
-                <input type="text" name="cityName" id="cityNameInput" required /> 
-                
-                <button type="submit">
-                    <span class="material-symbols-outlined"> search </span>
-                </button>
-            </div>
+      <div class="errorMessage">
+        <p class="cityError hidden">Please enter valid city.</p>
+        <p class="serverError hidden">Can't connect to server, try again.</p>
+      </div>
 
-            <div class="errorMessage">
-            <p class="cityError hidden">Please enter valid city.</p>
-            <p class="serverError hidden">Can't connect to server, try again.</p>
-            </div>
-        </form>
-        <div id="coreInfo" class="wrapper"></div>
+    </div>
+    <div class="unit">
+      <input type="radio" name="unit" id="celsiusRadio" value="Celsius" checked />
+      <label for="celsiusRadio">Celsius</label>  
+      <input type="radio" name="unit" id="fahrenheitRadio" value="Fahrenheit" />
+      <label for="fahrenheitRadio">Fahrenheit</label> 
+    </div>
     `;
-    return container;
+    return form;
   }
 
   // Function to create Hourly Forecast section
@@ -47,17 +45,7 @@ const MainPage = (() => {
     const container = createSection('hourlyForecast');
     container.innerHTML = `
       <h3>Hourly Forecast</h3>
-      <ul id="hourlyInfo" class="wrapper"></ul>
-    `;
-    return container;
-  }
-
-  // Function to create Current Condition section
-  function createWeatherCondition() {
-    const container = createSection('weatherCondition');
-    container.innerHTML = `
-      <h3>Current Condition</h3>
-      <div id="conditionInfo" class="wrapper"></div>
+      <ul id="hourlyInfo"></ul>
     `;
     return container;
   }
@@ -67,7 +55,7 @@ const MainPage = (() => {
     const container = createSection('dailyForecast');
     container.innerHTML = `
       <h3>Daily Forecast</h3>
-      <ul id="dailyInfo" class="wrapper"></ul>
+      <ul id="dailyInfo"></ul>
     `;
     return container;
   }
@@ -76,12 +64,17 @@ const MainPage = (() => {
   function initMain() {
     const mainTag = document.querySelector('main');
 
-    const mainInfo = createMainInfo();
+    const searchForm = createForm();
+    const weatherContent = createSection('weather');
+    const forecastContent = createSection('forecast');
     const hourlyForecast = createHourlyForecast();
-    const currentCondition = createWeatherCondition();
     const dailyForecast = createDailyForecast();
 
-    mainTag.append(mainInfo, hourlyForecast, currentCondition, dailyForecast);
+    weatherContent.classList.add('wrapper');
+    forecastContent.classList.add('wrapper', 'hidden');
+
+    forecastContent.append(hourlyForecast, dailyForecast);
+    mainTag.append(searchForm, weatherContent, forecastContent);
 
     // Add Handler
     EventHandler.mainPage();

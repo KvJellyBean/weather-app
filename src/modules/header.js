@@ -1,4 +1,5 @@
 import appLogo from '../images/logo.png';
+import EventHandler from './eventHandler';
 
 const Header = (() => {
   // Function to create Logo
@@ -12,11 +13,27 @@ const Header = (() => {
     return container;
   }
 
+  function createNavigation() {
+    const nav = document.createElement('nav');
+    nav.classList.add('navbar');
+    nav.innerHTML = `
+      <ul>
+        <li><a href="#weather" class="navLink active">Weather</a></li>
+        <li><a href="#forecast" class="navLink">Forecast</a></li>
+      </ul>
+    `;
+    return nav;
+  }
+
   // Header initialize
   function initHeader() {
     const headerTag = document.querySelector('header');
     const logo = createLogo();
-    headerTag.append(logo);
+    const navbar = createNavigation();
+    headerTag.append(logo, navbar);
+
+    // Event Handler
+    EventHandler.header();
   }
 
   return {
