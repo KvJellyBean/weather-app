@@ -1,4 +1,4 @@
-import appLogo from '../images/logo.png';
+import appLogo from '../images/logo.svg';
 import EventHandler from './eventHandler';
 
 const Header = (() => {
