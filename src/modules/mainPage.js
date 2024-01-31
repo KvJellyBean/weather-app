@@ -18,7 +18,7 @@ const MainPage = (() => {
     form.id = 'searchWeather';
     form.innerHTML = `
     <div class="searchBox"> 
-      <input type="text" name="cityName" id="cityNameInput" required placeholder="Enter name of the city (e.g. London)"/> 
+      <input type="text" name="cityName" id="cityNameInput" required placeholder="Enter name of the city (e.g. Tokyo)" autocomplete="off"/> 
       
       <button type="submit">
         <span class="material-symbols-outlined"> search </span>

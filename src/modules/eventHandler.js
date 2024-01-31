@@ -10,10 +10,10 @@ const EventHandler = (() => {
    *  Set active class to the clicked navigation link
    */
   function handleNavigationClick() {
-    const nav = document.querySelector('nav');
+    const nav = document.querySelector('nav ul');
     nav.addEventListener('click', (e) => {
       e.preventDefault();
-
+      if (e.target.matches('ul') || e.target.matches('li')) return;
       document.querySelectorAll('li .navLink').forEach((link) => {
         link.classList.remove('active');
       });
@@ -35,19 +35,20 @@ const EventHandler = (() => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const cityName = document.querySelector('#cityNameInput').value;
+      const cityName = document.querySelector('#cityNameInput');
       const unit =
         document.querySelector('input[name="unit"]:checked').value === 'Celsius'
           ? 'metric'
           : 'imperial';
 
       // Check similiarity of the previous city name and the current input
-      if (previousCityName.toLocaleLowerCase() === cityName.toLocaleLowerCase()) {
+      if (previousCityName.toLocaleLowerCase() === cityName.value.toLocaleLowerCase()) {
         return;
       }
 
-      DOM.renderAll(cityName, unit);
-      previousCityName = cityName;
+      DOM.renderAll(cityName.value, unit);
+      previousCityName = cityName.value;
+      cityName.value = '';
     });
   }
 
