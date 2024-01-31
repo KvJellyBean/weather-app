@@ -146,9 +146,10 @@ li {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   background-color: #00000090;
   font-size: 1.25rem;
+  text-align: center;
 }
 
 .loader {
@@ -246,7 +247,6 @@ main {
 
 /* Radio Button */
 .unit {
-  align-self: start;
   display: flex;
   position: relative;
   overflow: hidden;
@@ -308,9 +308,7 @@ input[type='radio']:checked + label[for='fahrenheitRadio']::after {
 input[type='radio']:checked + label[for='celsiusRadio']::after {
   left: 0;
 }
-* {
-  /* border: 1px solid red; */
-}
+
 /* Weather Screen */
 #weather {
   #mainContent {
@@ -588,6 +586,132 @@ footer {
   & a {
     text-decoration: none;
     color: inherit;
+  }
+}
+
+/* Media Query */
+@media screen and (max-width: 768px) {
+  main {
+    gap: 2rem;
+  }
+
+  .loaderContainer {
+    background: none;
+  }
+
+  #searchWeather {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    flex-direction: column;
+  }
+
+  main {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  #weather,
+  #forecast {
+    width: 90%;
+  }
+  #forecast {
+    #hourlyForecast #hourlyInfo,
+    #dailyForecast #dailyInfo {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+  }
+}
+
+@media screen and (max-width: 470px) {
+  main {
+    padding: 1rem 0;
+  }
+
+  #searchWeather {
+    .searchBox #cityNameInput {
+      max-width: 20rem;
+    }
+  }
+
+  #weather #mainContent {
+    #mainInfo {
+      min-width: 5rem;
+
+      .cityInfo h2 {
+        font-size: 1.5rem;
+      }
+
+      .weatherInfo {
+        & h2 {
+          font-size: 4rem;
+        }
+
+        & p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  header {
+    padding: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  #searchWeather {
+    .searchBox #cityNameInput {
+      max-width: 18rem;
+    }
+  }
+  & label {
+    font-size: 0.9rem;
+  }
+
+  #weather,
+  #forecast {
+    padding: 2rem;
+  }
+
+  #weather #mainContent #mainImg {
+    width: 15rem;
+    height: 10rem;
+  }
+
+  #weather #mainContent #mainInfo .cityInfo {
+    max-width: 10rem;
+  }
+  #weather #sideContent .conditionInfoWrapper {
+    column-gap: 1rem;
+  }
+
+  #forecast #hourlyForecast h3,
+  #forecast #dailyForecast h3 {
+    letter-spacing: 0;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 285px) {
+  #searchWeather {
+    .searchBox #cityNameInput {
+      width: 100%;
+    }
+  }
+
+  #weather #mainContent #mainImg {
+    width: 10rem;
+    height: 10rem;
   }
 }
 
