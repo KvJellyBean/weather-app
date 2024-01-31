@@ -61,15 +61,27 @@ const DOM = (() => {
     const weatherWrapper = document.querySelector('#weather');
     const forecastWrapper = document.querySelector('#forecast');
     weatherWrapper.classList.remove('hidden');
+    weatherWrapper.classList.add('showFromLeft');
     forecastWrapper.classList.add('hidden');
+
+    // Clear animation class
+    setTimeout(() => {
+      weatherWrapper.classList.remove('showFromLeft');
+    }, 500);
   }
 
   // Show forecast section
   function showForecastScreen() {
     const weatherWrapper = document.querySelector('#weather');
     const forecastWrapper = document.querySelector('#forecast');
-    weatherWrapper.classList.add('hidden');
     forecastWrapper.classList.remove('hidden');
+    forecastWrapper.classList.add('showFromRight');
+    weatherWrapper.classList.add('hidden');
+
+    // Clear animation class
+    setTimeout(() => {
+      forecastWrapper.classList.remove('showFromRight');
+    }, 500);
   }
 
   /**
@@ -226,7 +238,7 @@ const DOM = (() => {
    */
   function isNight(timestamp, timezone) {
     const currentHour = getHours(getTime(fromUnixTime(+timestamp), timezone));
-    return currentHour >= 16;
+    return currentHour >= 18 || currentHour <= 6;
   }
 
   // ==================== RENDER FUNCTIONS ====================
